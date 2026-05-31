@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CopriTurno per le strutture: trova medici per coperture e sostituzioni in tutta Italia</title>
+<meta name="description" content="Pubblichi una volta la richiesta di copertura, la segnaliamo ai medici compatibili della zona, ricevi candidature e scegli tu. Servizio in fase di validazione." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;650;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* clinic-page accents (navy-led, credibile/istituzionale) */
+  .hero.clinic::before { background:
+    radial-gradient(680px 420px at 88% -8%, #E7EEF4 0%, transparent 62%),
+    radial-gradient(520px 420px at -6% 8%, var(--teal-tint-2) 0%, transparent 60%); }
+  .post-mock { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; max-width: 400px; margin-inline: auto; }
+  .post-head { background: var(--navy); color: #fff; padding: 15px 18px; }
+  .post-head .lbl { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #5EE6D2; }
+  .post-head .ttl { font-size: 17px; font-weight: 700; margin-top: 3px; }
+  .post-body { padding: 16px 18px; }
+  .post-row { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-2); padding: 5px 0; }
+  .post-row svg { width: 16px; height: 16px; color: var(--teal-600); flex: none; }
+  .post-cand { border-top: 1px dashed var(--line); margin-top: 10px; padding-top: 13px; }
+  .post-cand .ch { font-size: 12.5px; font-weight: 700; color: var(--teal-700); margin-bottom: 9px; display: flex; align-items: center; gap: 7px; }
+  .cand { display: flex; align-items: center; gap: 11px; padding: 8px 0; }
+  .cand-av { width: 36px; height: 36px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 13px; color: #fff; }
+  .cand-meta { flex: 1; min-width: 0; }
+  .cand-meta b { font-size: 14px; color: var(--navy); display: block; }
+  .cand-meta span { font-size: 12px; color: var(--ink-3); }
+  .cand-new { font-size: 10.5px; font-weight: 800; color: #fff; background: var(--teal); padding: 3px 8px; border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: .04em; }
+  .trust-row { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; }
+  .trust-item { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-2); font-weight: 550; }
+  .trust-item svg { width: 19px; height: 19px; color: var(--teal); flex: none; }
+  .form-grid2 { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 520px) { .form-grid2 { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body data-density="regular">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="CopriTurno home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 8.3v4.1M9.9 10.4h4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-name">CopriTurno</span>
+    </a>
+    <nav class="aud-toggle" aria-label="Scegli il tuo profilo">
+      <a href="index.html">Per i medici</a>
+      <a class="active" href="strutture.html" aria-current="page">Per le strutture</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="#pubblica">Pubblica una richiesta</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO ============ -->
+  <section class="hero clinic">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="badges">
+            <span class="badge"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Il pool dei medici in Italia</span>
+            <span class="badge amber"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Pubblicare è gratis in fase di validazione</span>
+          </div>
+          <h1>Un turno scoperto, <span class="hl">senza il giro di telefonate</span></h1>
+          <p class="hero-sub">Pubblichi la richiesta una volta. La segnaliamo ai medici compatibili della tua zona. Ricevi le candidature e scegli tu, l'accordo resta diretto con il professionista.</p>
+          <div class="hero-cta-row">
+            <a class="btn btn-primary" href="#pubblica">Pubblica una richiesta</a>
+            <a class="btn btn-ghost" href="#demo">Prenota una demo</a>
+          </div>
+          <div class="trust-row">
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Medici della tua provincia</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/></svg>Scegli tu chi contattare</span>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="post-mock" role="img" aria-label="Esempio di richiesta pubblicata e candidature ricevute">
+            <div class="post-head">
+              <div class="lbl">Richiesta pubblicata</div>
+              <div class="ttl">Copertura medica · RSA</div>
+            </div>
+            <div class="post-body">
+              <div class="post-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-7-10a7 7 0 1114 0c0 5.6-7 10-7 10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><span>Modena · turno mattina (8–14)</span></div>
+              <div class="post-row"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Sabato 14 giugno · una giornata</span></div>
+              <div class="post-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M7 7h7a3 3 0 010 6H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Compenso indicato: 300 €/turno</span></div>
+              <div class="post-cand">
+                <div class="ch"><span class="cand-new">3 nuove</span> candidature compatibili</div>
+                <div class="cand">
+                  <span class="cand-av" style="background:#0D9488;">GR</span>
+                  <span class="cand-meta"><b>Dott.ssa G. R.</b><span>Medico abilitato · automunita · a 6 km</span></span>
+                </div>
+                <div class="cand">
+                  <span class="cand-av" style="background:#0F2A3F;">MP</span>
+                  <span class="cand-meta"><b>Dott. M. P.</b><span>Specializzando · disponibile sab/dom</span></span>
+                </div>
+                <div class="cand">
+                  <span class="cand-av" style="background:#F59E0B;color:#4A2E00;">LF</span>
+                  <span class="cand-meta"><b>Dott.ssa L. F.</b><span>Neolaureata · iscrizione Ordine in corso</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COME FUNZIONA ============ -->
+  <section class="section" id="come-funziona">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Dalla richiesta alla copertura, in chiaro</h2>
+        <p>Niente passaparola su venti gruppi. Pubblichi una volta e gestisci tutto da un posto solo.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><h3>Pubblichi la richiesta</h3><p>Indichi zona, profilo cercato, data, turno e compenso. Bastano pochi minuti.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>La segnaliamo ai medici</h3><p>Inviamo un alert solo ai professionisti del pool compatibili con la tua richiesta e la tua zona.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Ricevi candidature</h3><p>Ti arrivano i medici interessati con i dati utili per valutarli. Nessuna assegnazione automatica.</p></div>
+        <div class="step"><div class="step-num">4</div><h3>Scegli e contatti</h3><p>Selezioni chi preferisci e definite insieme i dettagli. L'accordo è diretto tra struttura e medico.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PERCHÉ ============ -->
+  <section class="section" id="perche" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Perché usarlo</span><h2>Cosa cambia per la tua struttura</h2></div>
+      <div class="benefits">
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19a5.5 5.5 0 0111 0M16 6a3 3 0 010 6M21 19a5.2 5.2 0 00-3.5-4.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><div><h3>Un pool di medici della zona</h3><p>Professionisti già interessati a coperture e sostituzioni vicino a te.</p></div></div>
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2 6 4-14 2 8h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Segnalazione mirata</h3><p>La richiesta arriva solo a chi è compatibile per zona e disponibilità: meno rumore, candidature più pertinenti.</p></div></div>
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.8"/></svg></span><div><h3>Scegli sempre tu</h3><p>Valuti i profili e contatti chi preferisci. Nessuna assegnazione imposta.</p></div></div>
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Meno tempo a inseguire</h3><p>Una richiesta al posto di decine di telefonate, messaggi e gruppi da gestire.</p></div></div>
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M7 7h7a3 3 0 010 6H8m8 0H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Gratis in fase di validazione</h3><p>Stiamo costruendo il servizio: pubblicare una richiesta ora non ha costi.</p></div></div>
+        <div class="benefit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><div><h3>Trasparente e a norma</h3><p>Segnaliamo, non assegniamo lavoro. La verifica dei requisiti (iscrizione all'Albo) resta in capo alla struttura.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORM: PUBBLICA RICHIESTA ============ -->
+  <section class="section" id="pubblica" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head" style="text-align:center;margin-inline:auto;">
+        <span class="eyebrow">Pubblica una richiesta</span>
+        <h2>Dicci cosa ti serve coprire</h2>
+        <p style="margin-inline:auto;">La trasformiamo in un alert per i medici compatibili della tua zona. Ti ricontattiamo con le candidature.</p>
+      </div>
+
+      <div style="max-width:640px;margin-inline:auto;">
+        <div class="form-card" id="clinic-card">
+          <form id="clinic-form" novalidate>
+            <div class="form-eyebrow"><h3>La richiesta</h3><span class="form-free">Gratis · 0 €</span></div>
+
+            <div class="field" data-required data-chips="single" data-name="tipo-struttura">
+              <label>Tipo di struttura</label>
+              <div class="chips single" data-group="tipo-struttura"></div>
+              <div class="field-err">Seleziona il tipo di struttura.</div>
+            </div>
+
+            <div class="field" data-required data-chips="multi" data-name="profilo">
+              <label>Profilo cercato <span class="hint">· anche più di uno</span></label>
+              <div class="chips" data-group="profilo"></div>
+              <div class="field-err">Indica almeno un profilo.</div>
+            </div>
+
+            <div class="form-grid2">
+              <div class="field" data-required>
+                <label for="c-citta">Città / zona</label>
+                <input class="input" type="text" id="c-citta" placeholder="Es. Modena" />
+                <div class="field-err">Indica la città o zona.</div>
+              </div>
+              <div class="field" data-required>
+                <label for="c-quando">Quando serve</label>
+                <input class="input" type="text" id="c-quando" placeholder="Es. sab 14 giu, o 1–2 settimane" />
+                <div class="field-err">Indica quando serve la copertura.</div>
+              </div>
+            </div>
+
+            <div class="field" data-required data-chips="multi" data-name="turni">
+              <label>Turni</label>
+              <div class="chips" data-group="turni"></div>
+              <div class="field-err">Seleziona almeno un turno.</div>
+            </div>
+
+            <div class="field" data-chips="single" data-name="urgenza">
+              <label>Urgenza</label>
+              <div class="chips single" data-group="urgenza"></div>
+            </div>
+
+            <div class="form-grid2">
+              <div class="field" data-required>
+                <label for="c-compenso">Compenso indicato</label>
+                <input class="input" type="text" id="c-compenso" placeholder="Es. 300 €/turno o 35 €/ora" />
+                <div class="field-err">Indica il compenso (anche indicativo).</div>
+              </div>
+              <div class="field">
+                <label for="c-note">Note <span class="opt">(opzionale)</span></label>
+                <input class="input" type="text" id="c-note" placeholder="Es. reparto, requisiti, alloggio…" />
+              </div>
+            </div>
+
+            <div class="form-eyebrow" style="margin-top:26px;"><h3 style="font-size:18px;">Chi vi contattiamo</h3></div>
+            <div class="form-grid2">
+              <div class="field" data-required>
+                <label for="c-struttura">Nome struttura</label>
+                <input class="input" type="text" id="c-struttura" placeholder="Es. RSA Casa Serena" />
+                <div class="field-err">Inserisci il nome della struttura.</div>
+              </div>
+              <div class="field" data-required>
+                <label for="c-ref">Referente</label>
+                <input class="input" type="text" id="c-ref" placeholder="Nome e cognome" />
+                <div class="field-err">Inserisci il referente.</div>
+              </div>
+              <div class="field" data-required data-type="phone">
+                <label for="c-tel">Telefono</label>
+                <input class="input" type="tel" id="c-tel" placeholder="Es. 059 123456" inputmode="tel" />
+                <div class="field-err">Inserisci un recapito telefonico valido.</div>
+              </div>
+              <div class="field" data-required>
+                <label for="c-email">Email</label>
+                <input class="input" type="email" id="c-email" placeholder="struttura@email.it" />
+                <div class="field-err">Controlla l'indirizzo email.</div>
+              </div>
+            </div>
+
+            <div class="form-note">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+              <span>CopriTurno invia <b>segnalazioni</b> ai medici: non è un'agenzia di somministrazione e non assegna lavoro. La verifica dei requisiti del professionista (inclusa l'iscrizione all'Albo quando necessaria) e l'accordo economico restano in capo alla struttura. Non raccogliamo dati dei pazienti.</span>
+            </div>
+
+            <label class="consent" data-required-consent>
+              <input type="checkbox" id="cc-terms" />
+              <span>Dichiaro di essere autorizzato/a a pubblicare la richiesta per conto della struttura e accetto l'<a href="#" class="open-privacy">informativa privacy</a>.</span>
+            </label>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-primary btn-block" id="clinic-submit">Pubblica la richiesta →</button>
+            </div>
+          </form>
+
+          <div class="confirm" id="clinic-confirm">
+            <div class="confirm-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6" opacity=".4"/><path d="M7.5 12.4l3 3 6-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Richiesta ricevuta ✓</h3>
+            <p>Grazie! La trasformiamo in una segnalazione per i medici compatibili della zona e vi ricontattiamo ai recapiti indicati con le candidature. Nessun medico viene assegnato in automatico: scegliete voi.</p>
+            <div class="confirm-recap" id="clinic-recap"></div>
+            <p style="font-size:14px;color:var(--ink-3);">In fase di validazione i tempi possono variare in base ai medici già presenti nella tua zona.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO / CONTATTO ============ -->
+  <section class="section" id="demo" style="padding-top:0;">
+    <div class="wrap">
+      <div class="density">
+        <div class="density-inner">
+          <span class="eyebrow">Preferisci parlarne?</span>
+          <h2>Prenota una demo o facci richiamare</h2>
+          <p>Se gestisci più sedi o hai esigenze ricorrenti, ti mostriamo come funziona e capiamo insieme se il pool è già attivo nella tua zona.</p>
+          <div class="density-cta">
+            <a class="btn btn-amber" href="#pubblica">Pubblica una richiesta</a>
+            <a class="btn btn-ghost" href="mailto:info@copriturno.it?subject=Demo%20CopriTurno" style="background:transparent;border-color:rgba(255,255,255,.3);color:#fff;">Scrivici per una demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Domande frequenti</span><h2>Per le strutture</h2></div>
+      <div class="faq">
+        <details class="faq-item"><summary>Siete un'agenzia di lavoro?<span class="pm">+</span></summary><div class="faq-body"><p>No. CopriTurno è un servizio in fase di validazione che invia <b>segnalazioni</b> di richieste ai medici del pool. Non somministriamo personale e non assegniamo lavoro: ricevete candidature e scegliete voi.</p></div></details>
+        <details class="faq-item"><summary>Quanto costa pubblicare?<span class="pm">+</span></summary><div class="faq-body"><p>In questa fase di validazione pubblicare una richiesta è gratuito. Eventuali condizioni future verranno comunicate in modo trasparente e in anticipo.</p></div></details>
+        <details class="faq-item"><summary>Chi verifica i requisiti del medico?<span class="pm">+</span></summary><div class="faq-body"><p>La verifica dei requisiti del professionista, inclusa l'iscrizione all'Albo quando necessaria, resta in capo alla struttura, come previsto per lo svolgimento dell'attività medica. Noi facilitiamo solo il contatto.</p></div></details>
+        <details class="faq-item"><summary>Come scelgo il medico?<span class="pm">+</span></summary><div class="faq-body"><p>Ricevete le candidature compatibili con i dati utili a valutarle e contattate chi preferite. L'accordo professionale ed economico è definito direttamente tra struttura e medico.</p></div></details>
+        <details class="faq-item"><summary>Come trattate i dati?<span class="pm">+</span></summary><div class="faq-body"><p>Usiamo i dati della struttura e del referente solo per gestire la richiesta e ricontattarvi, secondo l'informativa privacy. Non raccogliamo dati dei pazienti. <a href="#" class="open-privacy" style="color:var(--teal-700);font-weight:600;">Leggi l'informativa →</a></p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="final-cta">
+        <span class="eyebrow">Hai un turno da coprire?</span>
+        <h2>Pubblica la richiesta, ci pensiamo noi a farla girare</h2>
+        <p>Entra tra le prime strutture in Italia a usare il pool per coperture e sostituzioni.</p>
+        <a class="btn btn-primary" href="#pubblica">Pubblica una richiesta</a>
+        <p class="final-legal">Servizio in fase di validazione: invia segnalazioni, non è un'agenzia e non assegna lavoro. La verifica dei requisiti del medico e l'accordo restano tra le parti. Non raccogliamo dati dei pazienti.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 8.3v4.1M9.9 10.4h4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          CopriTurno
+        </div>
+        <p class="footer-desc">Il pool che mette in contatto medici disponibili e strutture in tutta Italia per coperture e sostituzioni a breve termine. Segnaliamo, non assegniamo.</p>
+      </div>
+      <nav class="footer-links" aria-label="Link footer">
+        <a href="index.html">Per i medici</a>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" class="open-privacy">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>CopriTurno è un servizio in fase di validazione. Invia segnalazioni di richieste di copertura: non è un'agenzia di lavoro/somministrazione e non garantisce incarichi né assegna personale. Gli accordi professionali ed economici sono definiti direttamente tra la struttura e il medico. La verifica dei requisiti del professionista, inclusa l'iscrizione all'Albo quando necessaria, resta in capo alla struttura. Non raccogliamo dati dei pazienti.</p>
+      <p>© <span id="year">2026</span> CopriTurno · Italia · <a href="#" class="open-privacy" style="color:#A9C0CF;">Informativa privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ PRIVACY MODAL ============ -->
+<div class="modal-overlay" id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+  <div class="modal">
+    <div class="modal-head"><h2 id="privacy-title">Informativa privacy</h2><button class="modal-close" id="privacy-close" aria-label="Chiudi">×</button></div>
+    <p>Sintesi in linguaggio chiaro di come trattiamo i dati della struttura e del referente quando pubblichi una richiesta. CopriTurno è un servizio in fase di validazione.</p>
+    <h3>Quali dati raccogliamo</h3>
+    <ul><li>Dati della struttura e del referente (nome struttura, referente, telefono, email) e i dettagli della richiesta di copertura.</li><li><b>Non</b> raccogliamo né trattiamo dati relativi ai pazienti.</li></ul>
+    <h3>Perché li usiamo</h3>
+    <ul><li>Trasformare la richiesta in una segnalazione per i medici compatibili della zona.</li><li>Ricontattarti con le candidature e gestire il servizio durante la fase di validazione.</li></ul>
+    <h3>Con chi li condividiamo</h3>
+    <p>I dettagli della richiesta vengono mostrati ai medici del pool per consentire la candidatura. I recapiti del referente sono usati per ricontattarti. Non vendiamo i dati a terzi.</p>
+    <h3>I tuoi diritti (GDPR)</h3>
+    <p>Puoi accedere ai dati, rettificarli, cancellarli, limitarne o opporti al trattamento e revocare il consenso in qualsiasi momento scrivendoci.</p>
+    <p class="modal-meta">Versione di sintesi a scopo dimostrativo. L'informativa completa e i recapiti del titolare verranno forniti prima dell'attivazione del servizio.</p>
+  </div>
+</div>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sc-text">
+    <strong>Pubblica una richiesta</strong>
+    <span>Gratis in fase di validazione</span>
+  </div>
+  <a class="btn btn-primary" href="#pubblica">Inizia</a>
+</div>
+
+<script src="clinic.js"></script>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#0F2A3F"/>
+    <path d="M50 24l20 7.4v14.4c0 13-8.4 23.4-20 27.8-11.6-4.4-20-14.8-20-27.8V31.4L50 24z" fill="#0D9488"/>
+    <path d="M50 39v18M41 48h18" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+</template>
+
+</body>
+</html>

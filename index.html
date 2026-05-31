@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CopriTurno: sostituzioni e coperture mediche in tutta Italia</title>
+<meta name="description" content="Registri una volta zona e disponibilità, ricevi su WhatsApp solo le richieste compatibili, decidi tu se candidarti. Gratis per i medici. Servizio in fase di validazione." />
+<meta name="theme-color" content="#0D9488" />
+
+<!-- Open Graph (WhatsApp / Telegram / Facebook) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CopriTurno" />
+<meta property="og:locale" content="it_IT" />
+<meta property="og:title" content="Sostituzioni mediche senza inseguire 20 gruppi" />
+<meta property="og:description" content="Il pool dei medici in Italia per coperture e sostituzioni. Registri zona e disponibilità una volta, ricevi su WhatsApp solo le richieste compatibili. Gratis per i medici." />
+<meta property="og:image" content="assets/og-preview.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="CopriTurno, sostituzioni mediche in tutta Italia" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sostituzioni mediche senza inseguire 20 gruppi" />
+<meta name="twitter:description" content="Il pool dei medici in Italia per coperture e sostituzioni. Gratis per i medici, su WhatsApp." />
+<meta name="twitter:image" content="assets/og-preview.jpg" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230D9488'/%3E%3Cpath d='M16 6l8 3v6c0 5.2-3.4 9.3-8 11-4.6-1.7-8-5.8-8-11V9l8-3z' fill='%23fff'/%3E%3Cpath d='M16 11v8M12 15h8' stroke='%230D9488' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-hero="whatsapp" data-density="regular">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="CopriTurno home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 8.3v4.1M9.9 10.4h4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-name">CopriTurno</span>
+    </a>
+    <nav class="aud-toggle" aria-label="Scegli il tuo profilo">
+      <a class="active" href="index.html" aria-current="page">Per i medici</a>
+      <a href="strutture.html">Per le strutture</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="#registrati">Entra gratis nel pool</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="badges">
+            <span class="badge"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Il pool dei medici in Italia</span>
+            <span class="badge amber"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Gratis per i medici</span>
+          </div>
+          <h1 id="hero-headline">Sostituzioni mediche <span class="hl">senza inseguire 20 gruppi</span></h1>
+          <p class="hero-sub">Registri una volta zona e disponibilità. Ricevi su WhatsApp solo le richieste compatibili. Decidi tu, caso per caso, se candidarti.</p>
+          <div class="hero-cta-row">
+            <a class="btn btn-primary" href="#registrati">Entra gratis nel pool</a>
+            <a class="btn btn-ghost" href="#come-funziona">Come funziona</a>
+          </div>
+          <p class="hero-reassure">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Nessuna candidatura automatica. L'accordo resta sempre tra te e la struttura.
+          </p>
+        </div>
+
+        <div class="hero-media">
+          <!-- WhatsApp alert mock -->
+          <div class="wa" role="img" aria-label="Esempio di richiesta ricevuta su WhatsApp">
+            <div class="wa-top">
+              <span class="wa-avatar">CT</span>
+              <div>
+                <div class="wa-name">CopriTurno · Alert</div>
+                <div class="wa-status">online</div>
+              </div>
+            </div>
+            <div class="wa-body">
+              <span class="wa-day">oggi</span>
+              <div class="bubble in">
+                <span class="tag">Compatibile con te</span>
+                <b>RSA a Milano</b> cerca copertura medica<br/>
+                🗓 Sab 14, turno mattina (8–14)<br/>
+                📍 ~12 km da Milano centro<br/>
+                💶 compenso indicato dalla struttura
+                <span class="meta">9:24</span>
+              </div>
+              <div class="bubble in">
+                Ti interessa? Decidi tu: ti mettiamo in contatto, l'accordo è diretto con la struttura.
+                <div class="wa-actions">
+                  <span class="wa-pill yes">Mi candido</span>
+                  <span class="wa-pill no">Salta</span>
+                </div>
+                <span class="meta">9:24</span>
+              </div>
+              <div class="bubble out">Mi candido 👍<span class="meta">9:26 ✓✓</span></div>
+            </div>
+          </div>
+
+          <!-- Abstract composition (alt hero, via tweak) -->
+          <div class="compo" aria-hidden="true">
+            <svg viewBox="0 0 420 420" width="100%" height="100%" fill="none">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0D9488"/><stop offset="1" stop-color="#0F766E"/>
+                </linearGradient>
+              </defs>
+              <rect x="40" y="40" width="340" height="340" rx="44" fill="url(#g1)"/>
+              <rect x="40" y="40" width="340" height="340" rx="44" fill="#0F2A3F" opacity="0.06"/>
+              <circle cx="312" cy="108" r="60" fill="#F59E0B" opacity="0.9"/>
+              <rect x="78" y="150" width="190" height="22" rx="11" fill="#fff" opacity="0.95"/>
+              <rect x="78" y="186" width="130" height="16" rx="8" fill="#fff" opacity="0.6"/>
+              <rect x="78" y="244" width="264" height="96" rx="20" fill="#fff"/>
+              <circle cx="116" cy="292" r="22" fill="#E6F6F4"/>
+              <path d="M108 292l6 6 12-12" stroke="#0D9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="150" y="276" width="150" height="13" rx="6.5" fill="#0F2A3F" opacity="0.85"/>
+              <rect x="150" y="300" width="96" height="11" rx="5.5" fill="#0F2A3F" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COME FUNZIONA ============ -->
+  <section class="section" id="come-funziona">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Quattro passi, poi sei nel pool</h2>
+        <p>Un'unica registrazione al posto di venti chat da controllare. Il resto arriva a te.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Lasci la disponibilità</h3>
+          <p>Indichi zona, tipo di turni, fasce orarie e durate che ti interessano. Una volta sola.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Ricevi un alert compatibile</h3>
+          <p>Quando una struttura della tua zona cerca copertura, ti segnaliamo la richiesta su WhatsApp.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Decidi tu</h3>
+          <p>Valuti caso per caso. Nessuna candidatura automatica: ti proponi solo se e quando vuoi.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>L'accordo è diretto</h3>
+          <p>I termini si definiscono direttamente tra te e la struttura. Noi facciamo solo la segnalazione.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEED: ESEMPI DI RICHIESTE ============ -->
+  <section class="feed section" id="esempi">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Esempi di richieste</span>
+        <h2>Il tipo di richieste che riceveresti</h2>
+        <p>Scegli la tua zona e guarda che aspetto ha un alert. Quelle vere arrivano su WhatsApp solo se compatibili con te.</p>
+      </div>
+
+      <div class="feed-disclaimer">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span>Sono <b>esempi illustrativi</b>, non incarichi reali. I compensi mostrati sono indicativi e vengono sempre definiti dalla struttura. Iscriviti per ricevere le richieste vere della tua zona.</span>
+      </div>
+
+      <div class="zona-bar" id="zona-bar" role="tablist" aria-label="Filtra per zona"></div>
+
+      <div class="req-list" id="req-list"></div>
+
+      <div class="feed-cta">
+        <a class="btn btn-primary" href="#registrati">Ricevi quelle vere nella tua zona</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PERCHÉ ISCRIVERTI ============ -->
+  <section class="section" id="perche" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Perché iscriverti</span>
+        <h2>Cosa ricevi entrando nel pool</h2>
+      </div>
+      <div class="benefits">
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+          <div><h3>Un profilo, non 20 chat</h3><p>Smetti di scorrere gruppi WhatsApp e Facebook. Resti aggiornato da un solo canale.</p></div>
+        </div>
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-7-10a7 7 0 1114 0c0 5.6-7 10-7 10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          <div><h3>Alert mirati per zona</h3><p>Solo le richieste vicine a te e coerenti con le disponibilità che hai indicato.</p></div>
+        </div>
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l2.5 2.5L16 8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          <div><h3>Scegli sempre tu</h3><p>Nessun impegno: valuti ogni richiesta e ti candidi solo a quelle che fanno per te.</p></div>
+        </div>
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M7 7h7a3 3 0 010 6H8m8 0H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h3>Gratis per i medici</h3><p>L'iscrizione al pool e gli alert non hanno costi per te.</p></div>
+        </div>
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+          <div><h3>Cancellabile quando vuoi</h3><p>Vuoi una pausa o uscire dal pool? Basta scriverci e rimuoviamo i tuoi dati.</p></div>
+        </div>
+        <div class="benefit">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.3 12l1.9 1.9 3.5-3.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h3>Trasparente per principio</h3><p>Segnalazioni chiare, nessuna pressione. I dati dei pazienti non ci riguardano e non li raccogliamo.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST / FONDATORE ============ -->
+  <section class="section" id="fiducia" style="padding-top:0;">
+    <div class="wrap">
+      <div class="trust">
+        <figure class="trust-photo">
+          <img src="assets/founder.jpg" alt="Chi costruisce CopriTurno" loading="lazy" width="900" height="1040" />
+        </figure>
+        <div class="trust-copy">
+          <span class="eyebrow">Chi c'è dietro</span>
+          <h2>Costruito da medici, per medici</h2>
+          <p>CopriTurno nasce da chi il problema delle sostituzioni lo ha vissuto in prima persona: ore perse tra venti gruppi WhatsApp, richieste viste troppo tardi, nessun posto unico dove farsi trovare.</p>
+          <p>Lo stiamo costruendo insieme a colleghi in tutta Italia, ascoltando chi cerca turni e chi deve coprirli. Niente promesse gonfiate: un servizio onesto, in fase di validazione, che cresce con il vostro contributo.</p>
+          <div class="trust-tags">
+            <span class="trust-tag"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Pensato per tutta Italia</span>
+            <span class="trust-tag"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/></svg>Indipendente e gratuito per i medici</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORM ============ -->
+  <section class="section" id="registrati" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head" style="text-align:center;margin-inline:auto;">
+        <span class="eyebrow">Registrazione</span>
+        <h2>Entra nel pool in meno di 2 minuti</h2>
+        <p style="margin-inline:auto;">Quasi tutto a tocchi: scegli le opzioni che ti somigliano. Solo nome e WhatsApp da scrivere.</p>
+      </div>
+
+      <div style="max-width:620px;margin-inline:auto;">
+        <div class="form-card" id="form-card">
+          <!-- FORM (steps injected/handled by app.js) -->
+          <form id="signup-form" novalidate>
+            <div class="form-eyebrow">
+              <h3 id="form-step-title">I tuoi contatti</h3>
+              <span class="form-free">Gratis · 0 €</span>
+            </div>
+
+            <div class="progress">
+              <div class="progress-meta"><span id="progress-label">Passo 1 di 3</span><span id="progress-pct">33%</span></div>
+              <div class="progress-track"><div class="progress-bar" id="progress-bar" style="width:33%"></div></div>
+            </div>
+
+            <!-- STEP 1 - Contatto (salvataggio immediato) -->
+            <div class="step-panel active" data-step="1">
+              <div class="field" data-required>
+                <label for="f-nome">Nome e cognome</label>
+                <input class="input" type="text" id="f-nome" name="nome" placeholder="Es. Giulia Rossi" autocomplete="name" />
+                <div class="field-err">Inserisci il tuo nome e cognome.</div>
+              </div>
+              <div class="field" data-required data-type="phone">
+                <label for="f-wa">Numero WhatsApp <span class="hint">· il canale principale per gli alert</span></label>
+                <div class="input-group">
+                  <span class="input-prefix">🇮🇹 +39</span>
+                  <input class="input" type="tel" id="f-wa" name="whatsapp" placeholder="333 123 4567" inputmode="tel" autocomplete="tel" />
+                </div>
+                <p class="field-micro"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Ti scriviamo solo quando c'è una richiesta che ti calza. Zero spam, zero catene.</p>
+                <div class="field-err">Inserisci un numero di telefono valido.</div>
+              </div>
+              <div class="field" data-required data-chips="single" data-name="tipo">
+                <label>Sei medico o infermiere/OSS?</label>
+                <div class="chips single duo" data-group="tipo"></div>
+                <div class="field-err">Seleziona la tua categoria.</div>
+              </div>
+              <div class="field" data-required>
+                <label for="f-regione">Regione</label>
+                <div class="select-wrap"><select class="input input-select" id="f-regione"></select></div>
+                <div class="field-err">Seleziona la tua regione.</div>
+              </div>
+              <div class="field" data-required data-chips="single" data-name="provincia" id="prov-wrap" style="display:none;">
+                <label>Provincia base <span class="hint">· dove sei di solito</span></label>
+                <div class="chips single" data-group="provincia"></div>
+                <div class="field-err">Seleziona la tua provincia.</div>
+              </div>
+              <div class="field">
+                <label for="f-email">Email <span class="opt">(opzionale)</span></label>
+                <input class="input" type="email" id="f-email" name="email" placeholder="nome@email.it" autocomplete="email" />
+                <div class="field-err">Controlla l'indirizzo email.</div>
+              </div>
+            </div>
+
+            <!-- STEP 2 - Stato professionale (+ branca condizionale) + estensione zona -->
+            <div class="step-panel" data-step="2">
+              <div class="field" data-required data-chips="single" data-name="stato">
+                <label>Stato professionale <span class="hint">· scegline uno</span></label>
+                <div class="chips single" data-group="stato"></div>
+                <div class="field-err">Seleziona il tuo stato professionale.</div>
+              </div>
+              <div class="field" id="branca-field" data-required style="display:none;">
+                <label for="f-branca">Branca / specializzazione <span class="hint">· per gli alert giusti</span></label>
+                <div class="select-wrap"><select class="input input-select" id="f-branca"></select></div>
+                <div class="field-err">Seleziona la branca.</div>
+              </div>
+              <div class="field" data-required data-chips="single" data-name="zoneext">
+                <label>Fin dove ti sposti? <span class="hint">· estensione della zona</span></label>
+                <div class="chips single" data-group="zoneext"></div>
+                <div class="field-err">Scegli l'estensione della zona.</div>
+              </div>
+            </div>
+
+            <!-- STEP 3 - Opportunità, disponibilità, durate, P.IVA + consensi -->
+            <div class="step-panel" data-step="3">
+              <div class="field" data-required data-chips="multi" data-name="tipi">
+                <label>Tipi di opportunità <span class="hint">· cosa valuti</span></label>
+                <div class="chips" data-group="tipi"></div>
+                <div class="field-err">Seleziona almeno un tipo di opportunità.</div>
+              </div>
+              <div class="field" data-required data-chips="multi" data-name="disponibilita">
+                <label>Disponibilità</label>
+                <div class="chips" data-group="disponibilita"></div>
+                <div class="field-err">Indica almeno una disponibilità.</div>
+              </div>
+              <div class="field" data-chips="multi" data-name="durate">
+                <label>Durate che valuti <span class="opt">(opzionale)</span></label>
+                <div class="chips" data-group="durate"></div>
+              </div>
+              <div class="field" data-chips="single" data-name="piva">
+                <label>Partita IVA</label>
+                <div class="chips single" data-group="piva"></div>
+              </div>
+
+              <div class="form-note">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+                <span>Per svolgere attività medica servono sempre i requisiti previsti, inclusa l'iscrizione all'Albo quando necessaria. CopriTurno è un servizio in fase di validazione: invia segnalazioni, non garantisce incarichi.</span>
+              </div>
+
+              <label class="consent" data-required-consent>
+                <input type="checkbox" id="c-contact" />
+                <span>Acconsento a essere contattato/a da CopriTurno via WhatsApp ed email per ricevere segnalazioni di copertura compatibili.</span>
+              </label>
+              <label class="consent" data-required-consent>
+                <input type="checkbox" id="c-privacy" />
+                <span>Ho letto e accetto l'<a href="#" id="open-privacy-2">informativa privacy (GDPR)</a> e il trattamento dei miei dati per le finalità indicate.</span>
+              </label>
+            </div>
+
+            <!-- NAV -->
+            <div class="form-nav">
+              <button type="button" class="btn-back" id="btn-back" style="display:none;">← Indietro</button>
+              <button type="button" class="btn btn-primary btn-block" id="btn-next">Continua</button>
+            </div>
+          </form>
+
+          <!-- CONFIRMATION -->
+          <div class="confirm" id="confirm">
+            <div class="confirm-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6" opacity=".4"/><path d="M7.5 12.4l3 3 6-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Ci sei, sei nel pool 🎉</h3>
+            <p>Grazie <span id="confirm-name">collega</span>! Ti avviseremo su WhatsApp non appena attiviamo le strutture nella tua zona e arriva una richiesta compatibile. Nessuna candidatura parte senza il tuo ok.</p>
+            <div class="confirm-recap" id="confirm-recap"></div>
+            <p style="font-size:14px;color:var(--ink-3);">La tua zona parte prima se inviti i colleghi: più medici nella tua provincia = si attiva prima = più guardie e sostituzioni per tutti voi. Gira il messaggio qui sotto 👇</p>
+          </div>
+        </div>
+
+        <!-- SHARE (shown after confirm) -->
+        <div class="share-box" id="share-box" style="display:none;margin-top:16px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <span class="ic" style="width:38px;height:38px;border-radius:10px;background:var(--teal-tint);color:var(--teal-700);display:grid;place-items:center;flex:none;">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <div>
+              <strong style="color:var(--navy);font-size:16px;">Sblocca la tua zona: invita i colleghi</strong>
+              <div style="font-size:13.5px;color:var(--ink-3);">Attiviamo per prime le zone con più medici iscritti. Ogni collega che porti avvicina la tua zona alla partenza, e le coperture arrivano a tutti voi.</div>
+            </div>
+          </div>
+          <div class="share-msg" id="share-msg"></div>
+          <div class="share-actions">
+            <a class="btn btn-wa" id="share-wa" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2-1.3-.5-.5-.8-1-1.1-1.5-.1-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.2-.5 0-.2 0-.3-.1-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.7.6-1 1.5-1 2.5 0 1.5 1 2.9 1.2 3.1.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.8.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+              Invia su WhatsApp
+            </a>
+            <button class="btn btn-ghost" id="share-copy" type="button">Copia messaggio</button>
+            <span class="copied-toast" id="copied-toast">Copiato ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DENSITÀ / FOMO ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="density">
+        <div class="density-inner">
+          <span class="eyebrow">Come parte una zona</span>
+          <h2>La tua zona parte prima se inviti i colleghi</h2>
+          <p>Attiviamo per prime le province e le regioni dove ci sono già abbastanza medici iscritti. Funziona come una massa critica: ogni collega che porti avvicina la <em>tua</em> zona all'attivazione, e quando parte le coperture arrivano a tutti voi, non solo a te.</p>
+          <div class="priority">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8-4.3-4.1 5.9-.9L12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Più medici nella tua zona = la tua zona parte prima = più guardie per tutti
+          </div>
+          <div class="proof-count" id="proof-count" style="display:none;"></div>
+          <div class="proof-strip" id="proof-strip"></div>
+          <div class="density-cta">
+            <a class="btn btn-amber" href="#registrati">Prendi il tuo posto nel pool</a>
+            <button type="button" class="btn btn-ghost" id="share-jump" style="background:transparent;border-color:rgba(255,255,255,.3);color:#fff;">Invita i colleghi della tua zona</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Domande frequenti</span>
+        <h2>Le risposte che cerchi</h2>
+      </div>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>È davvero gratis?<span class="pm">+</span></summary>
+          <div class="faq-body"><p>Sì. Per i medici l'iscrizione al pool e la ricezione degli alert sono gratuiti. Non ti chiediamo pagamenti né dati di pagamento.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Mi garantite turni o incarichi?<span class="pm">+</span></summary>
+          <div class="faq-body"><p>No. CopriTurno è un servizio in fase di validazione che invia <b>segnalazioni</b> di richieste compatibili: non è un'agenzia che assegna lavoro e non garantisce incarichi.</p><p>Nessuna candidatura parte in automatico: decidi tu, caso per caso. Gli accordi professionali ed economici sono definiti direttamente tra te e la struttura.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Posso iscrivermi se mi laureo a giugno?<span class="pm">+</span></summary>
+          <div class="faq-body"><p>Sì. Puoi entrare nel pool come laureando/a o neolaureato/a per farti trovare pronto/a. Ricorda però che per svolgere attività medica servono sempre i requisiti previsti, inclusa l'iscrizione all'Albo quando necessaria.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Chi sceglie a quali richieste candidarmi?<span class="pm">+</span></summary>
+          <div class="faq-body"><p>Solo tu. Noi ti segnaliamo le richieste coerenti con zona e disponibilità che hai indicato; sei tu a decidere se proporti. Poi ti mettiamo in contatto con la struttura e l'accordo prosegue direttamente tra le parti.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Come usate i miei dati?<span class="pm">+</span></summary>
+          <div class="faq-body"><p>Usiamo i tuoi dati solo per inviarti segnalazioni compatibili e contattarti via WhatsApp ed email, secondo l'informativa privacy. Non raccogliamo dati dei pazienti. Puoi chiederci di aggiornarli o cancellarli quando vuoi.</p><p><a href="#" class="open-privacy" style="color:var(--teal-700);font-weight:600;">Leggi l'informativa privacy →</a></p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="final-cta">
+        <span class="eyebrow">Pronto/a?</span>
+        <h2>Registrati una volta. Ricevi solo ciò che fa per te.</h2>
+        <p>Entra nel pool di medici per coperture e sostituzioni a breve termine in tutta Italia.</p>
+        <a class="btn btn-primary" href="#registrati">Entra gratis nel pool</a>
+        <p class="final-legal">Servizio in fase di validazione: invia segnalazioni, non garantisce incarichi. Nessuna candidatura automatica. Decidi tu caso per caso. Gli accordi professionali sono definiti direttamente tra le parti.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l6.5 2.4v4.7c0 4.2-2.7 7.6-6.5 9-3.8-1.4-6.5-4.8-6.5-9V5.9L12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 8.3v4.1M9.9 10.4h4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          CopriTurno
+        </div>
+        <p class="footer-desc">Il pool che mette in contatto medici disponibili e strutture in tutta Italia per coperture e sostituzioni a breve termine. Segnaliamo, non assegniamo.</p>
+      </div>
+      <nav class="footer-links" aria-label="Link footer">
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#faq">FAQ</a>
+        <a href="#registrati">Registrati</a>
+        <a href="#" class="open-privacy">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>CopriTurno è un servizio in fase di validazione. Invia segnalazioni di richieste di copertura: non è un'agenzia di lavoro e non garantisce incarichi. Nessuna candidatura automatica. Gli accordi professionali ed economici sono definiti direttamente tra il medico e la struttura. Per svolgere attività medica servono sempre i requisiti previsti, inclusa l'iscrizione all'Albo quando necessaria. Non raccogliamo dati dei pazienti.</p>
+      <p>© <span id="year">2026</span> CopriTurno · Italia · <a href="#" class="open-privacy" style="color:#A9C0CF;">Informativa privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ PRIVACY MODAL ============ -->
+<div class="modal-overlay" id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="privacy-title">Informativa privacy</h2>
+      <button class="modal-close" id="privacy-close" aria-label="Chiudi">×</button>
+    </div>
+    <p>Questa è una sintesi in linguaggio chiaro di come trattiamo i tuoi dati quando ti iscrivi al pool CopriTurno. CopriTurno è un servizio in fase di validazione.</p>
+
+    <h3>Chi tratta i dati</h3>
+    <p>Il titolare del trattamento è il team di CopriTurno. Per esercitare i tuoi diritti o avere informazioni puoi scriverci ai recapiti indicati al momento del contatto.</p>
+
+    <h3>Quali dati raccogliamo</h3>
+    <ul>
+      <li>Dati che fornisci tu: nome e cognome, numero WhatsApp, città, email (opzionale), stato professionale, zone, tipi di opportunità, disponibilità e informazioni pratiche.</li>
+      <li><b>Non</b> raccogliamo né trattiamo dati relativi ai pazienti.</li>
+    </ul>
+
+    <h3>Perché li usiamo</h3>
+    <ul>
+      <li>Inviarti segnalazioni di richieste di copertura compatibili con quanto hai indicato.</li>
+      <li>Contattarti via WhatsApp ed email per queste finalità, sulla base del tuo consenso.</li>
+      <li>Capire la copertura del servizio per zona durante la fase di validazione.</li>
+    </ul>
+
+    <h3>Con chi li condividiamo</h3>
+    <p>Quando decidi di candidarti a una richiesta, condividiamo con la struttura interessata solo i dati necessari a metterti in contatto. Da quel momento l'accordo prosegue direttamente tra te e la struttura. Non vendiamo i tuoi dati a terzi.</p>
+
+    <h3>Per quanto tempo</h3>
+    <p>Conserviamo i dati finché resti nel pool. Puoi chiederci in qualsiasi momento di aggiornarli o cancellarli.</p>
+
+    <h3>I tuoi diritti (GDPR)</h3>
+    <p>Hai diritto di accedere ai tuoi dati, rettificarli, cancellarli, limitarne o opporti al trattamento e revocare il consenso in qualsiasi momento. Per farlo, basta scriverci.</p>
+
+    <p class="modal-meta">Versione di sintesi a scopo dimostrativo per un servizio in fase di validazione. L'informativa completa e i recapiti del titolare verranno forniti prima dell'attivazione del servizio.</p>
+  </div>
+</div>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sc-text">
+    <strong>Entra gratis nel pool</strong>
+    <span>Gratis · 0 € · cancellabile quando vuoi</span>
+  </div>
+  <a class="btn btn-primary" href="#registrati">Inizia</a>
+</div>
+
+<script src="scripts.js"></script>
+
+<template id="__bundler_thumbnail" data-bg-color="#0D9488">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#0D9488"/>
+    <path d="M50 24l20 7.4v14.4c0 13-8.4 23.4-20 27.8-11.6-4.4-20-14.8-20-27.8V31.4L50 24z" fill="#fff" opacity="0.95"/>
+    <path d="M50 39v18M41 48h18" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+</template>
+
+</body>
+</html>
