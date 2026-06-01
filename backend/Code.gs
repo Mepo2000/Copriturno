@@ -1,35 +1,51 @@
 /**
  * CopriTurno — Backend di raccolta (Google Apps Script + Google Sheet)
  * ------------------------------------------------------------------
- * Riceve ogni salvataggio del form (parziale step-1 e completo),
- * fa UPSERT per leadId (così lo stesso medico = una sola riga che si
- * arricchisce mano a mano) e restituisce il conteggio iscritti.
+ * Riceve i salvataggi dei DUE form e li instrada in due fogli:
+ *   - "Leads"     → medici (page = "medici"): UPSERT per leadId con
+ *                   cattura progressiva (step1_contatto → completo).
+ *   - "Strutture" → richieste RSA/cliniche (page = "strutture").
+ * doGet restituisce il conteggio dei medici (per il contatore "onesto").
  *
- * SETUP RAPIDO (vedi README.md per i dettagli):
+ * SETUP RAPIDO (vedi README.md):
  *  1. Crea un Google Sheet vuoto.
- *  2. Estensioni → Apps Script. Incolla questo file (sostituisce tutto).
- *  3. Deploy → Nuovo deployment → tipo "App web".
- *       - Esegui come: Me
- *       - Chi ha accesso: Chiunque
- *  4. Copia l'URL /exec e incollalo in scripts.js → CONFIG.endpoint
- *       e CONFIG.counterEndpoint (lo stesso URL + "?count=1").
+ *  2. Estensioni → Apps Script. Incolla questo file (sostituisce tutto). Salva.
+ *  3. Deploy → Nuovo deployment → tipo "App web"
+ *       - Esegui come: Me      - Chi ha accesso: Chiunque
+ *  4. Copia l'URL /exec e incollalo in config.js → endpoint
+ *       (counterEndpoint = lo stesso URL + "?count=1").
  */
 
-var SHEET_NAME = 'Leads';
+var SHEETS = {
+  medici: {
+    name: 'Leads',
+    headers: [
+      'leadId', 'stage', 'ts', 'page', 'nome', 'whatsapp', 'tipo',
+      'regione', 'provincia', 'zona_estensione', 'email', 'stato', 'branca',
+      'tipi', 'disponibilita', 'durate', 'piva',
+      'consenso_contatto', 'consenso_privacy', 'ua', 'updated'
+    ]
+  },
+  strutture: {
+    name: 'Strutture',
+    headers: [
+      'leadId', 'stage', 'ts', 'page', 'struttura', 'referente', 'telefono', 'email',
+      'tipo_struttura', 'profilo', 'citta', 'quando', 'turni', 'urgenza',
+      'compenso', 'note', 'consenso', 'ua', 'updated'
+    ]
+  }
+};
 
-var HEADERS = [
-  'leadId', 'stage', 'ts', 'page', 'nome', 'whatsapp', 'tipo',
-  'regione', 'provincia', 'zona_estensione', 'email', 'stato', 'branca',
-  'tipi', 'disponibilita', 'durate', 'piva',
-  'consenso_contatto', 'consenso_privacy', 'ua', 'updated'
-];
+function cfgFor_(page) {
+  return (page === 'strutture') ? SHEETS.strutture : SHEETS.medici;
+}
 
-function getSheet_() {
+function getSheet_(cfg) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sh = ss.getSheetByName(SHEET_NAME);
+  var sh = ss.getSheetByName(cfg.name);
   if (!sh) {
-    sh = ss.insertSheet(SHEET_NAME);
-    sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+    sh = ss.insertSheet(cfg.name);
+    sh.getRange(1, 1, 1, cfg.headers.length).setValues([cfg.headers]).setFontWeight('bold');
     sh.setFrozenRows(1);
   }
   return sh;
@@ -42,25 +58,30 @@ function doPost(e) {
   lock.tryLock(20000);
   try {
     var d = JSON.parse(e.postData.contents || '{}');
-    var sh = getSheet_();
-    var row = HEADERS.map(function (h) {
+    var cfg = cfgFor_(d.page);
+    var sh = getSheet_(cfg);
+    var H = cfg.headers;
+    var row = H.map(function (h) {
       if (h === 'updated') return new Date();
       return flat_(d[h]);
     });
 
-    // UPSERT per leadId (colonna 1)
-    var ids = sh.getRange(2, 1, Math.max(sh.getLastRow() - 1, 0), 1).getValues();
+    // UPSERT per leadId (colonna 1): una sola riga che si arricchisce mano a mano
+    var n = Math.max(sh.getLastRow() - 1, 0);
     var found = -1;
-    for (var i = 0; i < ids.length; i++) {
-      if (ids[i][0] === d.leadId) { found = i + 2; break; }
+    if (n > 0 && d.leadId) {
+      var ids = sh.getRange(2, 1, n, 1).getValues();
+      for (var i = 0; i < ids.length; i++) {
+        if (ids[i][0] === d.leadId) { found = i + 2; break; }
+      }
     }
     if (found > 0) {
-      // non sovrascrivere campi già valorizzati con stringhe vuote
-      var cur = sh.getRange(found, 1, 1, HEADERS.length).getValues()[0];
+      // non sovrascrivere con stringhe vuote campi già valorizzati
+      var cur = sh.getRange(found, 1, 1, H.length).getValues()[0];
       for (var j = 0; j < row.length; j++) {
-        if ((row[j] === '' || row[j] == null) && cur[j] !== '' && HEADERS[j] !== 'updated') row[j] = cur[j];
+        if ((row[j] === '' || row[j] == null) && cur[j] !== '' && H[j] !== 'updated') row[j] = cur[j];
       }
-      sh.getRange(found, 1, 1, HEADERS.length).setValues([row]);
+      sh.getRange(found, 1, 1, H.length).setValues([row]);
     } else {
       sh.appendRow(row);
     }
@@ -72,9 +93,10 @@ function doPost(e) {
   }
 }
 
+// Conteggio medici iscritti (per il contatore "onesto" in pagina)
 function doGet(e) {
-  var sh = getSheet_();
-  var count = Math.max(sh.getLastRow() - 1, 0);
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEETS.medici.name);
+  var count = sh ? Math.max(sh.getLastRow() - 1, 0) : 0;
   return json_({ count: count });
 }
 

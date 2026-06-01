@@ -5,7 +5,9 @@ Il form (`index.html` + `scripts.js`) salva **ogni passo** del wizard:
 - **Step 2 / 3 / 4** → arricchiscono **la stessa riga** (UPSERT per `leadId`).
 - Tutto viene **sempre** salvato anche in `localStorage` del browser, come rete di sicurezza.
 
-Devi solo collegare un endpoint. Sotto la via consigliata (gratis, dati consultabili in un foglio).
+Anche il form **strutture** (`strutture.html` + `clinic.js`) salva la richiesta nel backend, nel foglio **Strutture**.
+
+Devi solo collegare un endpoint, in **un solo punto** (`config.js`) valido per entrambe le pagine. Sotto la via consigliata (gratis, dati consultabili in un foglio).
 
 ---
 
@@ -19,9 +21,9 @@ Devi solo collegare un endpoint. Sotto la via consigliata (gratis, dati consulta
    - *Chi ha accesso*: **Chiunque**
    - Deploy → autorizza con il tuo account.
 4. Copia l'**URL** che finisce con `/exec`.
-5. Apri **`scripts.js`** e in cima, nel blocco `CONFIG`, incolla:
+5. Apri **`config.js`** (un solo file, vale per medici **e** strutture) e incolla:
    ```js
-   var CONFIG = {
+   window.CT_CONFIG = {
      endpoint:        "https://script.google.com/macros/s/XXXXX/exec",
      counterEndpoint: "https://script.google.com/macros/s/XXXXX/exec?count=1",
      counterManual:   null
@@ -29,7 +31,20 @@ Devi solo collegare un endpoint. Sotto la via consigliata (gratis, dati consulta
    ```
 6. Fatto. Ogni iscrizione compare come riga nel foglio `Leads`; il contatore in pagina mostra il numero reale di iscritti.
 
-> Dove vedo i dati? Nel Google Sheet, foglio **Leads**. Una riga per persona, con tutte le colonne (contatti, zona, profilo, branca, disponibilità, consensi, stage raggiunto, timestamp).
+> Dove vedo i dati? Nel Google Sheet trovi due fogli: **Leads** (medici, una riga per persona che si arricchisce per step) e **Strutture** (richieste RSA/cliniche). Colonne complete: contatti, zona, profilo, disponibilità, consensi, stage, timestamp.
+
+---
+
+## Come verificare che funziona (test in 2 minuti)
+
+1. Apri `index.html` nel browser e apri la **Console** (F12 → scheda Console).
+   - Se compare l'avviso *"endpoint backend non configurato"*, `config.js` non è ancora collegato: incolla l'URL `/exec`.
+   - Se non compaiono avvisi, l'endpoint è impostato.
+2. Compila il form medici fino in fondo e invia. Apri il Google Sheet → foglio **Leads**: deve comparire una riga (che si arricchisce a ogni step grazie all'UPSERT su `leadId`).
+3. Ripeti su `strutture.html` → la richiesta deve comparire nel foglio **Strutture**.
+4. Ricarica la landing medici: il contatore mostra il numero reale di righe in **Leads**.
+
+> La POST è "best-effort" (`no-cors`): la pagina **non** legge la risposta del server, quindi il test vero è **vedere la riga comparire nel foglio**. Se non compare: ricontrolla che il deployment abbia accesso *"Chiunque"*, che l'URL finisca in `/exec` e che tu abbia autorizzato lo script col tuo account. Il `localStorage` del browser è solo una copia sul device di chi compila: **non** è una copia per te.
 
 ---
 

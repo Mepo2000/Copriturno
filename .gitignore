@@ -1,0 +1,6 @@
+# Tooling locale di sviluppo (preview server) — non fa parte del prodotto
+.claude/launch.json
+
+# Documenti riservati: NON pubblicarli sul repo pubblico (restano solo in locale)
+CLAUDE.md
+gestionale.html

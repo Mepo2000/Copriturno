@@ -6,6 +6,34 @@
 (function () {
   "use strict";
 
+  /* CONFIG backend condiviso (vedi config.js → window.CT_CONFIG e backend/README.md) */
+  var CONFIG = window.CT_CONFIG || { endpoint: "" };
+  function val_(id) { var e = document.getElementById(id); return e ? e.value.trim() : ""; }
+
+  /* Ogni richiesta è una riga NUOVA nel foglio: una struttura può pubblicare più
+     turni diversi nel tempo, quindi a ogni invio generiamo un id-richiesta fresco
+     (niente UPSERT, che sovrascriverebbe la richiesta precedente). */
+  function newRequestId() {
+    return "ct_str_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  /* salvataggio: localStorage (rete di sicurezza) + POST best-effort al backend */
+  function sendClinicLead(payload) {
+    try { localStorage.setItem("ct_clinic_lead", JSON.stringify(payload)); } catch (e) {}
+    if (CONFIG.endpoint) {
+      try {
+        fetch(CONFIG.endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        }).catch(function () {});
+      } catch (e) {}
+    } else if (window.console) {
+      console.warn("CopriTurno: endpoint backend non configurato — la richiesta resta solo in localStorage e NON arriva al foglio. Imposta window.CT_CONFIG.endpoint in config.js (vedi backend/README.md).");
+    }
+  }
+
   var CHIPS = {
     "tipo-struttura": ["RSA / CRA", "Clinica privata", "Casa di cura", "Studio MMG", "Poliambulatorio", "Evento / sport", "Medicina del lavoro", "Altro"],
     "profilo": ["Medico di reparto", "Guardia medica", "Sostituto MMG", "Medico ambulatoriale", "Medicina del lavoro", "Specializzando ok", "Neolaureato ok"],
@@ -87,6 +115,13 @@
       turni: selected("turni"),
       compenso: document.getElementById("c-compenso").value.trim()
     };
+    sendClinicLead({
+      leadId: newRequestId(), stage: "completo", page: "strutture", ts: new Date().toISOString(),
+      struttura: val_("c-struttura"), referente: val_("c-ref"), telefono: val_("c-tel"), email: val_("c-email"),
+      tipo_struttura: data.tipo, profilo: data.profilo, citta: data.citta, quando: data.quando,
+      turni: data.turni, urgenza: selected("urgenza")[0] || "", compenso: data.compenso, note: val_("c-note"),
+      consenso: !!(document.getElementById("cc-terms") || {}).checked, ua: navigator.userAgent
+    });
     form.style.display = "none";
     var confirm = document.getElementById("clinic-confirm");
     confirm.classList.add("active");

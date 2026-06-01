@@ -17,7 +17,7 @@
      - counterManual:   numero aggiornabile a mano se non usi l'API
                         (lascia null per non mostrare numeri finti)
      ========================================================= */
-  var CONFIG = {
+  var CONFIG = window.CT_CONFIG || {
     endpoint: "",          // es. "https://script.google.com/macros/s/XXXX/exec"
     counterEndpoint: "",   // es. lo stesso URL + "?count=1"
     counterManual: null    // es. 120  (oppure null)
@@ -315,6 +315,8 @@
           body: JSON.stringify(payload)
         }).catch(function () {});
       } catch (e) {}
+    } else if (window.console) {
+      console.warn("CopriTurno: endpoint backend non configurato — il lead resta solo in localStorage e NON arriva al foglio. Imposta window.CT_CONFIG.endpoint in config.js (vedi backend/README.md).");
     }
   }
 
@@ -464,9 +466,10 @@
   function renderProofProvinces() {
     if (!proof) return;
     proof.innerHTML = "";
-    ["Lombardia", "Lazio", "Piemonte", "Emilia-Romagna", "Campania"].forEach(function (p) {
+    // Messaggio inclusivo: niente regioni specifiche, così chi è fuori elenco non si sente escluso
+    ["Adesioni aperte in tutta Italia", "Le zone con più iscritti partono prima"].forEach(function (p) {
       var s = document.createElement("span"); s.className = "proof-prov";
-      s.innerHTML = '<span class="dot"></span>' + p + ' · in raccolta adesioni';
+      s.innerHTML = '<span class="dot"></span>' + p;
       proof.appendChild(s);
     });
   }
