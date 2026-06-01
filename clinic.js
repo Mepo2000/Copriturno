@@ -10,6 +10,16 @@
   var CONFIG = window.CT_CONFIG || { endpoint: "" };
   function val_(id) { var e = document.getElementById(id); return e ? e.value.trim() : ""; }
 
+  /* Sorgente della richiesta: ?src=<canale> + referrer (per capire da dove arriva). */
+  var SRC = (function () {
+    try { var c = JSON.parse(localStorage.getItem("ct_src") || "null"); if (c && (c.source || c.referrer)) return c; } catch (e) {}
+    var p; try { p = new URLSearchParams(location.search); } catch (e) { p = null; }
+    var g = function (k) { return p ? (p.get(k) || "") : ""; };
+    var c = { source: g("src") || g("utm_source") || g("ref") || "", referrer: document.referrer || "" };
+    try { localStorage.setItem("ct_src", JSON.stringify(c)); } catch (e) {}
+    return c;
+  })();
+
   /* Ogni richiesta è una riga NUOVA nel foglio: una struttura può pubblicare più
      turni diversi nel tempo, quindi a ogni invio generiamo un id-richiesta fresco
      (niente UPSERT, che sovrascriverebbe la richiesta precedente). */
@@ -120,7 +130,8 @@
       struttura: val_("c-struttura"), referente: val_("c-ref"), telefono: val_("c-tel"), email: val_("c-email"),
       tipo_struttura: data.tipo, profilo: data.profilo, citta: data.citta, quando: data.quando,
       turni: data.turni, urgenza: selected("urgenza")[0] || "", compenso: data.compenso, note: val_("c-note"),
-      consenso: !!(document.getElementById("cc-terms") || {}).checked, ua: navigator.userAgent
+      consenso: !!(document.getElementById("cc-terms") || {}).checked,
+      source: SRC.source, referrer: SRC.referrer, ua: navigator.userAgent
     });
     form.style.display = "none";
     var confirm = document.getElementById("clinic-confirm");

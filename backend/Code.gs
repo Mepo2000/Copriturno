@@ -20,10 +20,10 @@ var SHEETS = {
   medici: {
     name: 'Leads',
     headers: [
-      'leadId', 'stage', 'ts', 'page', 'nome', 'whatsapp', 'tipo',
+      'leadId', 'stage', 'ts', 'page', 'nome', 'whatsapp', 'whatsapp_normalized', 'tipo',
       'regione', 'provincia', 'zona_estensione', 'email', 'stato', 'branca',
       'tipi', 'disponibilita', 'durate', 'piva',
-      'consenso_contatto', 'consenso_privacy', 'ua', 'updated'
+      'consenso_contatto', 'consenso_privacy', 'source', 'campaign', 'referrer', 'ua', 'updated'
     ]
   },
   strutture: {
@@ -31,7 +31,7 @@ var SHEETS = {
     headers: [
       'leadId', 'stage', 'ts', 'page', 'struttura', 'referente', 'telefono', 'email',
       'tipo_struttura', 'profilo', 'citta', 'quando', 'turni', 'urgenza',
-      'compenso', 'note', 'consenso', 'ua', 'updated'
+      'compenso', 'note', 'consenso', 'source', 'referrer', 'ua', 'updated'
     ]
   }
 };
@@ -47,6 +47,12 @@ function getSheet_(cfg) {
     sh = ss.insertSheet(cfg.name);
     sh.getRange(1, 1, 1, cfg.headers.length).setValues([cfg.headers]).setFontWeight('bold');
     sh.setFrozenRows(1);
+  } else {
+    // Auto-allinea l'intestazione se sono state aggiunte colonne (es. source/referrer)
+    var head = sh.getRange(1, 1, 1, cfg.headers.length).getValues()[0];
+    var diff = false;
+    for (var i = 0; i < cfg.headers.length; i++) { if (head[i] !== cfg.headers[i]) { diff = true; break; } }
+    if (diff) { sh.getRange(1, 1, 1, cfg.headers.length).setValues([cfg.headers]).setFontWeight('bold'); sh.setFrozenRows(1); }
   }
   return sh;
 }

@@ -289,6 +289,10 @@
       piva: selected("piva")[0] || "",
       consenso_contatto: !!(document.getElementById("c-contact") || {}).checked,
       consenso_privacy: !!(document.getElementById("c-privacy") || {}).checked,
+      whatsapp_normalized: ("39" + val("f-wa")).replace(/[^\d]/g, ""),
+      source: SRC.source,
+      campaign: SRC.campaign,
+      referrer: SRC.referrer,
       ua: navigator.userAgent
     };
   }
@@ -303,6 +307,19 @@
     leadId = "ct_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
     localStorage.setItem("ct_leadId", leadId);
   }
+
+  /* Sorgente del lead: ?src=<canale> + referrer. Catturata una volta e memorizzata,
+     così sopravvive alla navigazione. Serve a capire DA DOVE arrivano le iscrizioni
+     (gruppi WhatsApp, Reddit, Facebook, referral…) e quale canale converte meglio. */
+  var SRC = (function () {
+    try { var c = JSON.parse(localStorage.getItem("ct_src") || "null"); if (c && (c.source || c.referrer)) return c; } catch (e) {}
+    var p; try { p = new URLSearchParams(location.search); } catch (e) { p = null; }
+    var g = function (k) { return p ? (p.get(k) || "") : ""; };
+    var c = { source: g("src") || g("utm_source") || g("ref") || "", campaign: g("utm_campaign") || "", referrer: document.referrer || "" };
+    try { localStorage.setItem("ct_src", JSON.stringify(c)); } catch (e) {}
+    return c;
+  })();
+
   function sendLead(stage) {
     var payload = collect(stage);
     try { localStorage.setItem("ct_lead", JSON.stringify(payload)); } catch (e) {}
@@ -342,7 +359,7 @@
 
   /* messaggio WhatsApp condivisibile — leva: più medici nella tua zona = parte prima */
   function buildShareMsg(zoneShort, joined) {
-    var url = location.href.split("#")[0] + "#registrati";
+    var url = location.href.split("#")[0].split("?")[0] + "?src=referral#registrati";
     var qui = zoneShort ? (" qui a " + zoneShort) : " nella nostra zona";
     return "\ud83e\ude7a *CopriTurno*: per non perdere pi\u00f9 sostituzioni e guardie" + qui + ".\n\n" +
       "Ti iscrivi una volta (zona + disponibilit\u00e0) e ricevi su WhatsApp solo le richieste compatibili: RSA, sostituzioni MMG, guardie private, ambulatori. Decidi tu se candidarti, l'accordo \u00e8 diretto con la struttura. \u00c8 gratis.\n\n" +
